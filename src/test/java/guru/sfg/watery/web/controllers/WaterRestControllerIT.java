@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class BeerRestControllerIT extends BaseIT {
+public class WaterRestControllerIT extends BaseIT {
 
     @Test
     void findBeers() throws Exception{

@@ -15,27 +15,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class WaterControllerIT extends BaseIT{
 
     @Test
-    void findBeers() throws Exception{
+    void initCreationForm() throws Exception{
+        mockMvc.perform(get("/waters/new").with(httpBasic("user","password")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("waters/createWater"))
+                .andExpect(model().attributeExists("water"));
+    }
+
+    @Test
+    void findWaters() throws Exception{
         mockMvc.perform(get("/waters/find"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("waters/findBeers"))
-                .andExpect(model().attributeExists("beer"));
+                .andExpect(view().name("waters/findWaters"))
+                .andExpect(model().attributeExists("water"));
     }
 
     @Test
-    void findBeersWithHttpBasic() throws Exception{
+    void findWatersWithHttpBasic() throws Exception{
         mockMvc.perform(get("/waters/find").with(httpBasic("spring","guru")))
                 .andExpect(status().isOk())
-                .andExpect(view().name("waters/findBeers"))
-                .andExpect(model().attributeExists("beer"));
+                .andExpect(view().name("waters/findWaters"))
+                .andExpect(model().attributeExists("water"));
     }
 
     @Test
-    void findBeersAnonymous() throws Exception{
+    void findWatersAnonymous() throws Exception{
         mockMvc.perform(get("/waters/find").with(anonymous()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("waters/findBeers"))
-                .andExpect(model().attributeExists("beer"));
+                .andExpect(view().name("waters/findWaters"))
+                .andExpect(model().attributeExists("water"));
     }
 
 }
