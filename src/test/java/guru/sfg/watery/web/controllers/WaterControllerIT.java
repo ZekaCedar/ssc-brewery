@@ -23,6 +23,22 @@ public class WaterControllerIT extends BaseIT{
     }
 
     @Test
+    void initCreationFormWithSpring() throws Exception{
+        mockMvc.perform(get("/waters/new").with(httpBasic("spring","guru")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("waters/createWater"))
+                .andExpect(model().attributeExists("water"));
+    }
+
+    @Test
+    void initCreationFormNewUser() throws Exception{
+        mockMvc.perform(get("/waters/new").with(httpBasic("scott","tiger")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("waters/createWater"))
+                .andExpect(model().attributeExists("water"));
+    }
+
+    @Test
     void findWaters() throws Exception{
         mockMvc.perform(get("/waters/find"))
                 .andExpect(status().isOk())
